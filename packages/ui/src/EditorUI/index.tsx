@@ -3,6 +3,7 @@ import DisplayModeToggle, { StickyNess } from '../DisplayModeToggle/index';
 import ThemeProvider from '../ThemeProvider';
 import PluginDrawer from '../PluginDrawer/index';
 import Trash from '../Trash/index';
+import CurrentCellBottomToolbar from '../CurrentCellBottomToolbar';
 
 export default React.memo(
   ({
@@ -20,6 +21,7 @@ export default React.memo(
       <Trash />
       {!hideEditorSidebar && <DisplayModeToggle stickyNess={stickyNess} />}
       <PluginDrawer />
+      <CurrentCellBottomToolbar />
     </ThemeProvider>
   )
 );
