@@ -1,4 +1,4 @@
-import { EditableType } from '../..';
+import { EditableType } from '../../types';
 import { CURRENT_EDITABLE_VERSION } from '../EDITABLE_MIGRATIONS';
 import { OldEditableType } from '../EDITABLE_MIGRATIONS/from0to1';
 import { migrateEditable } from '../migrate';

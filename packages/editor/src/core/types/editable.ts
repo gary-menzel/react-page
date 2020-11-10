@@ -15,7 +15,7 @@ export type Cell = NodeBase & {
     version: number;
   };
 
-  dataI18n?: I18nField<{
+  dataI18n?: I18nField<void | {
     [key: string]: unknown;
   }>;
 
@@ -46,7 +46,7 @@ export type PartialCell = Omit<Partial<Cell>, 'rows' | 'plugin'> & {
   rows?: PartialRow[];
   plugin?: Cell['plugin'] | string;
   /**set data in default lang */
-  data?: unknown;
+  data?: void | { [key: string]: unknown };
 };
 
 export const isRow = (node: Node): node is Row => {

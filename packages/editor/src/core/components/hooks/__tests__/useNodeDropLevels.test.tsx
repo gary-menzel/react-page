@@ -3,7 +3,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import { useNodeDropLevels } from '..';
 import Provider from '../../../Provider';
 import React from 'react';
-import { EditableType } from '../../..';
+import { EditableType } from '../../../types';
 
 const SAMPLE_STATE: EditableType = {
   version: 1,

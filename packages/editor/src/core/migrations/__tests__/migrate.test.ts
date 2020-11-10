@@ -1,5 +1,5 @@
-import { Migration } from '../..';
 import { migrate } from '../migrate';
+import { Migration } from '../Migration';
 describe('migrate', () => {
   describe('cases with 1 migration', () => {
     const dataIn = {

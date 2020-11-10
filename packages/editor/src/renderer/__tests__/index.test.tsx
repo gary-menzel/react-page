@@ -1,7 +1,7 @@
-import { CellPlugin } from '@react-page/editor';
 import slate from '@react-page/plugins-slate';
 import { render } from 'enzyme';
 import * as React from 'react';
+import { CellPlugin, Plugins } from '../../core/types';
 import { HTMLRenderer } from '../HTMLRenderer';
 
 jest.mock('react', () => {
@@ -10,17 +10,17 @@ jest.mock('react', () => {
   return { ...r, memo: (x) => x };
 });
 
-const Layout: React.FC = ({ children }) => (
+const Renderer: React.FC = ({ children }) => (
   <div className={`some-layout`}>{children}</div>
 );
 
 const someLayoutPlugin: CellPlugin = {
   id: 'layout',
   version: 1,
-  Component: Layout,
+  Renderer: Renderer,
 };
 
-const plugins = [slate(), someLayoutPlugin];
+const plugins: Plugins = [slate(), someLayoutPlugin];
 
 describe('HTMLRenderer', () => {
   describe('rendering html content from slate', () => {

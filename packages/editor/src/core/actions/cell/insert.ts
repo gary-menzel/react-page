@@ -3,6 +3,7 @@ import { v4 } from 'uuid';
 import { HoverTarget } from '../../service/hover/computeHover';
 import {
   Cell,
+  I18nField,
   NewIds,
   Options,
   PartialCell,
@@ -79,7 +80,14 @@ export const createCell = (
     partialCell.rows?.length > 0
       ? partialCell.rows
       : plugin?.createInitialChildren?.() ?? [];
-
+  const dataI18n = {
+    [lang]:
+      partialCell?.data ??
+      plugin?.createInitialData?.(partialCell) ??
+      plugin?.createInitialState?.(partialCell) ??
+      null,
+    ...(partialCell.dataI18n ?? {}),
+  } as I18nField<void | { [key: string]: unknown }>;
   return removeUndefinedProps({
     id: partialCell.id ?? v4(),
     isDraft: partialCell.isDraft,
@@ -95,14 +103,7 @@ export const createCell = (
         }
       : undefined,
     rows: partialRows?.map((r) => createRow(r, options)),
-    dataI18n: {
-      [lang]:
-        partialCell?.data ??
-        plugin?.createInitialData?.(partialCell) ??
-        plugin?.createInitialState?.(partialCell) ??
-        null,
-      ...(partialCell.dataI18n ?? {}),
-    },
+    dataI18n: dataI18n,
   });
 };
 

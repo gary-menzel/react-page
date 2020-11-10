@@ -391,7 +391,7 @@ export const useUpdateCellData = (id: string) => {
   const currentLang = useLang();
   return useCallback(
     (
-      data: unknown,
+      data: void | { [key: string]: unknown },
       options: {
         lang?: string;
         notUndoable?: boolean;

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import * as React from 'react';
+import React from 'react';
 import { DragPreviewImage, useDrag } from 'react-dnd';
 import { CellDrag } from '../../../types/editable';
 import {
@@ -26,12 +26,6 @@ type Props = {
   nodeId: string;
 };
 const Draggable: React.FC<Props> = ({ isLeaf, children, nodeId }) => {
-  const preventBlurWhenClickingOnHandle = React.useCallback(
-    (e: React.MouseEvent) => {
-      e.stopPropagation();
-    },
-    []
-  );
   const cell = useCell(nodeId);
 
   const plugin = useCellPlugin(nodeId);
@@ -97,7 +91,7 @@ const Draggable: React.FC<Props> = ({ isLeaf, children, nodeId }) => {
               isLayoutMode && !options.allowMoveInEditMode,
             'react-page-cell-draggable-is-dragging': isDragging,
           })}
-          onMouseDown={preventBlurWhenClickingOnHandle}
+          onMouseDown={(e) => e.stopPropagation()}
         >
           {focused ? (
             <div ref={dragRef}>

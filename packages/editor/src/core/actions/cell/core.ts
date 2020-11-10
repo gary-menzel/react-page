@@ -42,7 +42,7 @@ export interface UpdateCellDataAction extends Action {
 }
 
 export const updateCellData = (id: string) => (
-  data: unknown,
+  data: void | { [key: string]: unknown },
   options: {
     lang: string;
     notUndoable?: boolean;

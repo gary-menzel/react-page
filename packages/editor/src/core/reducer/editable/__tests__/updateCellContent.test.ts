@@ -1,4 +1,4 @@
-import { CellPlugin, EditableType } from '../../..';
+import { CellPlugin, EditableType } from '../../../types';
 import { updateCellData } from '../../../actions/cell';
 import { createEditable } from '../../../utils/createEditable';
 import { simulateDispatch } from '../testUtils';
@@ -7,6 +7,7 @@ const plugins: CellPlugin[] = [
   {
     id: 'foo',
     version: 1,
+    Renderer: () => null,
   },
 ];
 
