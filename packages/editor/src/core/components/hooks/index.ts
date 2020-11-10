@@ -4,6 +4,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 import { useDrop } from 'react-dnd';
@@ -276,24 +277,44 @@ export const useCellData = (nodeId: string, lang?: string) => {
 /**
  *
  * return [data, onChangeData] pair, with setData debouncing the propagation
+ * also data is always partially updated
  * @param nodeId the nodeId
  */
 export const useDebouncedCellData = (nodeId: string) => {
   const cellData = useCellData(nodeId);
   const [data, setData] = useState(cellData);
-  const updateCellDataDebounced = useCallback(debounce(updateCellData, 1000), [
-    updateCellData,
-  ]);
+  const dataRef = useRef(data);
+  dataRef.current = data;
+  const cellDataRef = useRef(cellData);
+
+  const updateCellData = useUpdateCellData(nodeId);
+  const updateCellDataDebounced = useCallback(
+    debounce((options) => {
+      cellDataRef.current = dataRef.current;
+      updateCellData(dataRef.current, options);
+    }, 200),
+    [updateCellData]
+  );
+
   useEffect(() => {
-    setData(cellData);
+    const changed = !deepEquals(cellData, cellDataRef.current);
+    if (changed) {
+      cellDataRef.current = cellData;
+      setData(cellData);
+    }
   }, [cellData]);
 
   const onChange = useCallback(
-    (data) => {
-      setData(data);
-      updateCellDataDebounced(data);
+    (partialData, options) => {
+      const fullData = {
+        ...data,
+        ...partialData,
+      };
+      setData(fullData);
+
+      updateCellDataDebounced(options);
     },
-    [updateCellDataDebounced, setData]
+    [updateCellDataDebounced, setData, data]
   );
   return [data, onChange] as const;
 };
@@ -375,14 +396,15 @@ export const useUpdateCellData = (id: string) => {
         lang?: string;
         notUndoable?: boolean;
       } = {}
-    ) =>
+    ) => {
       dispatch(
         updateCellData(id)(data, {
           notUndoable: false,
           lang: currentLang,
           ...options,
         })
-      ),
+      );
+    },
     [dispatch, id, currentLang]
   );
 };

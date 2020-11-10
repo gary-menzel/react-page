@@ -1,17 +1,11 @@
 import * as React from 'react';
-import { CellPluginComponentProps } from '../../../types';
 import {
-  useCellData,
   useCellHasPlugin,
-  useCellPlugin,
   useFocusCell,
-  useIsEditMode,
   useIsFocused,
   useIsPreviewMode,
-  useLang,
   useNodeChildrenIds,
-  useRemoveCell,
-  useUpdateCellData,
+  useSetEditMode,
 } from '../../hooks';
 import Row from '../../Row';
 import Draggable from '../Draggable';
@@ -22,7 +16,7 @@ import PluginComponent from '../PluginComponent';
 const Inner: React.FC<{ nodeId: string }> = ({ nodeId }) => {
   const isPreviewMode = useIsPreviewMode();
   const cellShouldHavePlugin = useCellHasPlugin(nodeId);
-
+  const setEditMode = useSetEditMode();
   const focus = useFocusCell(nodeId);
   const focused = useIsFocused(nodeId);
   const childrenIds = useNodeChildrenIds(nodeId);
@@ -40,6 +34,7 @@ const Inner: React.FC<{ nodeId: string }> = ({ nodeId }) => {
         !(e.target as HTMLDivElement).classList.contains('resize-handle')
       ) {
         focus(false, 'onMouseDown');
+        setEditMode();
       }
       return true;
     },
@@ -56,7 +51,7 @@ const Inner: React.FC<{ nodeId: string }> = ({ nodeId }) => {
         <div
           onMouseDown={!isPreviewMode ? onMouseDown : undefined}
           tabIndex={-1}
-          style={{ outline: 'none' }}
+          style={{ outline: 'none', height: '100%' }}
           className={
             'react-page-cell-inner' +
             (hasChildren ? '' : ' react-page-cell-leaf')

@@ -9,6 +9,7 @@ import GradientIcon from '@material-ui/icons/Gradient';
 import ImageIcon from '@material-ui/icons/Landscape';
 
 import * as React from 'react';
+import { BackgroundApi } from '../types/api';
 import { BackgroundControlsProps } from '../types/controls';
 import { ModeEnum } from '../types/ModeEnum';
 import ColorComponent from './sub/Color';
@@ -20,10 +21,10 @@ interface BackgroundDefaultControlsState {
 }
 
 class Inner extends React.Component<
-  BackgroundControlsProps,
+  BackgroundControlsProps & BackgroundApi,
   BackgroundDefaultControlsState
 > {
-  constructor(props: BackgroundControlsProps) {
+  constructor(props: BackgroundControlsProps & BackgroundApi) {
     super(props);
     this.state = {
       mode: props.defaultMode,

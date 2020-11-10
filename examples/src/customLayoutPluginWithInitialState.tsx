@@ -7,13 +7,12 @@ export default () =>
   createLayoutPlugin<{
     backgroundColor: string;
   }>({
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    Renderer: ({ children, state }: any) => (
+    Renderer: ({ children, data }) => (
       <div
         style={{
           border: '1px solid black',
           padding: 50,
-          backgroundColor: state.backgroundColor,
+          backgroundColor: data.backgroundColor,
         }}
       >
         {children}

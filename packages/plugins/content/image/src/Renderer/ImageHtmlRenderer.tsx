@@ -13,21 +13,23 @@ const ImageHtmlRenderer: React.FC<CellPluginComponentProps<ImageState>> = (
 
   const src = data?.src;
   const openInNewWindow = data?.openInNewWindow;
-  const Image = (
+  const image = (
     <img className="react-page-plugins-content-image" alt="" src={src} />
   );
+
   return src ? (
     <div>
-      {data?.href && !props.isEditMode ? (
+      {data?.href ? (
         <a
+          onClick={props.isEditMode ? (e) => e.preventDefault() : undefined}
           href={data?.href}
           target={openInNewWindow ? '_blank' : undefined}
           rel={openInNewWindow ? 'noreferrer noopener' : undefined}
         >
-          {Image}
+          {image}
         </a>
       ) : (
-        Image
+        image
       )}
     </div>
   ) : (

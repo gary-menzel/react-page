@@ -51,7 +51,7 @@ const ImageControls: ImageControlType = (props) => {
         label={props.translations.hrefLabel}
         name="href"
         style={{ width: '512px' }}
-        value={props.data.href}
+        value={props.data.href ?? ''}
         onChange={(e) =>
           props.onChange({
             href: e.target.value,
@@ -64,10 +64,9 @@ const ImageControls: ImageControlType = (props) => {
         control={
           <Checkbox
             value={props.data.openInNewWindow ?? false}
-            name="target"
             onChange={(e) =>
               props.onChange({
-                openInNewWindow: e.target.value,
+                openInNewWindow: e.target.checked,
               })
             }
           />

@@ -4,7 +4,7 @@ import { BackgroundProps } from '../types/component';
 
 import { ImageLoaded, RGBColor } from '@react-page/editor';
 import { ModeEnum } from '../types/ModeEnum';
-import { BackgroundApi } from '../types/api';
+
 import Inner from './Inner';
 
 export type BackgroundState = {
@@ -21,9 +21,10 @@ export type BackgroundState = {
   imagePreview?: ImageLoaded;
 };
 
-class BackgroundDefaultControls
-  extends React.Component<BackgroundProps, BackgroundState>
-  implements BackgroundApi {
+class BackgroundDefaultControls extends React.Component<
+  BackgroundProps,
+  BackgroundState
+> {
   constructor(props: BackgroundProps) {
     super(props);
     this.state = {};

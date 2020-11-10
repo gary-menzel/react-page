@@ -5,6 +5,7 @@ import { SlateProps } from '../types/component';
 import { SlatePlugin } from '../types/SlatePlugin';
 import { useOnKeyDown } from './hotkeyHooks';
 import { useRenderElement, useRenderLeave } from './renderHooks';
+
 const HoverButtons = lazyLoad(() => import('./HoverButtons'));
 
 const SlateEditable = React.memo(
@@ -17,7 +18,7 @@ const SlateEditable = React.memo(
     const { plugins, defaultPluginType, readOnly, placeholder } = props;
     const renderElement = useRenderElement({ plugins, defaultPluginType }, []);
     const renderLeaf = useRenderLeave({ plugins }, []);
-    const onKeyDown = readOnly ? undefined : useOnKeyDown({ plugins }, []);
+    const onKeyDown = useOnKeyDown({ plugins }, []);
 
     return (
       <Editable
@@ -25,7 +26,7 @@ const SlateEditable = React.memo(
         readOnly={readOnly}
         renderElement={renderElement}
         renderLeaf={renderLeaf}
-        onKeyDown={onKeyDown}
+        onKeyDown={readOnly ? undefined : onKeyDown}
       />
     );
   }
@@ -42,7 +43,6 @@ const SlateEditor = (props: SlateProps) => {
           translations={props.translations}
         />
       )}
-
       <SlateEditable
         placeholder={props.translations.placeholder}
         readOnly={readOnly}

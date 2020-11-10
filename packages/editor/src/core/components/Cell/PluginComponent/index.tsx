@@ -1,10 +1,6 @@
-import * as React from 'react';
-import { useCallback } from 'react';
-import { useEffect } from 'react';
+import React from 'react';
 import AutoformControls from '../../../../ui/AutoformControls';
 import BottomToolbar from '../../../../ui/BottomToolbar';
-
-import CellBottomToolbar from '../../../../ui/CellBottomToolbar';
 import { CellPluginComponentProps } from '../../../types';
 import {
   useCellPlugin,
@@ -15,7 +11,6 @@ import {
   useLang,
   useRemoveCell,
 } from '../../hooks';
-import InsertNew from '../InsertNew';
 import PluginMissing from '../PluginMissing';
 
 const DefaultProvider: React.FC = ({ children }) => <>{children}</>;
@@ -49,31 +44,30 @@ const PluginComponent: React.FC<{ nodeId: string }> = ({
     remove,
   };
 
-  let controls = null;
-  if (controls?.type === 'custom') {
-    const { Component } = controls;
-    controls = <Component {...componentProps} />;
+  let controlsElement = null;
+  if (plugin?.controls?.type === 'custom') {
+    const { Component } = plugin.controls;
+    controlsElement = <Component {...componentProps} />;
   }
-  if (controls?.type === 'autoform') {
-    controls = <AutoformControls {...componentProps} {...controls} />;
+  if (plugin?.controls?.type === 'autoform') {
+    controlsElement = (
+      <AutoformControls {...componentProps} {...plugin.controls} />
+    );
   }
 
   return (
     <Provider {...componentProps}>
       <>
-        <Component {...componentProps}>
-          {children}
-          <InsertNew parentCellId={nodeId} />
-        </Component>
+        <Component {...componentProps}>{children}</Component>
         <BottomToolbar
           nodeId={nodeId}
-          open={focused}
+          open={focused && isEditMode}
           dark={plugin.controls?.dark}
         >
           <div
             style={{ marginBottom: 24, maxHeight: '50vh', overflow: 'auto' }}
           >
-            {controls}
+            {controlsElement}
           </div>
         </BottomToolbar>
       </>

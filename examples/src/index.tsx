@@ -17,7 +17,7 @@ import {
   Select,
 } from '@material-ui/core';
 //import { defaultSlate } from './slate';
-import useWhyDidYouUpdate from './useWhyDidYouUpdate';
+//import useWhyDidYouUpdate from './useWhyDidYouUpdate';
 
 const LANGUAGES = [
   {
@@ -31,7 +31,7 @@ const LANGUAGES = [
 ];
 const KeepStateEditor: React.FC<EditorProps> = ({ value, ...props }) => {
   const [state, setState] = React.useState(value);
-  useWhyDidYouUpdate('editable' + value?.id, state);
+
   useEffect(() => {
     console.log('state changed', state);
   }, [state]);

@@ -104,7 +104,7 @@ const Draggable: React.FC<Props> = ({ isLeaf, children, nodeId }) => {
               {options.editModeResizeHandle ?? <DefaultSmallHandle />}
             </div>
           ) : null}
-          <div>{children}</div>
+          {children}
         </div>
       </>
     );

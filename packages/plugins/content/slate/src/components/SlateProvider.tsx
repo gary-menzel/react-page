@@ -1,5 +1,11 @@
 import debounce from 'lodash.debounce';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { createEditor, Node, Transforms } from 'slate';
 import { Slate, withReact } from 'slate-react';
 import withInline from '../slateEnhancer/withInline';
@@ -8,6 +14,9 @@ import { SlateProps } from '../types/component';
 
 const SlateProvider: React.FC<SlateProps> = (props) => {
   const { data, plugins, children, defaultPluginType } = props;
+  const [value, setValue] = useState<Node[]>(data?.slate);
+  const valueRef = useRef(value);
+  valueRef.current = value;
   const editor = useMemo(
     () =>
       withPaste(
@@ -16,10 +25,22 @@ const SlateProvider: React.FC<SlateProps> = (props) => {
       )(withReact(withInline(plugins)(createEditor()))),
     []
   );
-  const onChangeDebounced = useMemo(() => debounce(props.onChange, 200), [
-    props.onChange,
-  ]);
-  const [value, setValue] = useState<Node[]>(data?.slate);
+  const onChangeDebounced = useCallback(
+    debounce(() => {
+      props.onChange(
+        {
+          slate: valueRef.current,
+          selection: editor.selection,
+        },
+        {
+          // mark as not undoable when state is same
+          // that happens if only selection was changed
+          notUndoable: valueRef.current === data.slate,
+        }
+      );
+    }, 200),
+    [props.onChange, editor]
+  );
 
   useEffect(() => {
     if (data.selection) {
@@ -36,18 +57,7 @@ const SlateProvider: React.FC<SlateProps> = (props) => {
     (v) => {
       if (editor.selection) {
         setValue(v);
-
-        onChangeDebounced(
-          {
-            slate: v,
-            selection: editor.selection,
-          },
-          {
-            // mark as not undoable when state is same
-            // that happens if only selection was changed
-            notUndoable: v === data.slate,
-          }
-        );
+        onChangeDebounced();
       }
     },
     [onChangeDebounced]
