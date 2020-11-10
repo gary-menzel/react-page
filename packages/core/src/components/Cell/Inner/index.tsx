@@ -22,7 +22,6 @@ import PluginMissing from '../PluginMissing';
 
 const Inner: React.FC<{ nodeId: string }> = ({ nodeId }) => {
   const lang = useLang();
-  const editableId = useEditableId();
   const isPreviewMode = useIsPreviewMode();
   const isEditMode = useIsEditMode();
 
@@ -36,7 +35,7 @@ const Inner: React.FC<{ nodeId: string }> = ({ nodeId }) => {
   const focused = useIsFocused(nodeId);
   const childrenIds = useNodeChildrenIds(nodeId);
   const ref = React.useRef<HTMLDivElement>();
-  const Component = plugin?.Component ?? PluginMissing;
+  const Component = plugin.Renderer ?? PluginMissing;
   const remove = useRemoveCell(nodeId);
   const hasChildren = childrenIds.length > 0;
 
@@ -74,10 +73,8 @@ const Inner: React.FC<{ nodeId: string }> = ({ nodeId }) => {
           ref={ref}
         >
           <Component
-            editable={editableId}
             nodeId={nodeId}
             lang={lang}
-            state={cellData}
             data={cellData}
             pluginConfig={plugin}
             focused={isEditMode && focused}

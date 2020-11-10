@@ -1,10 +1,5 @@
-import {
-  CellPlugin,
-  CellPluginComponentProps,
-  lazyLoad,
-} from '@react-page/core';
-import * as React from 'react';
-import { ControlsType, PluginWithSchemaDefinition } from './types';
+import { CellPlugin } from '@react-page/core';
+import { PluginWithSchemaDefinition } from './types';
 
 type CustomizeFunction<T, CT> = (
   def: PluginWithSchemaDefinition<T>
@@ -17,26 +12,16 @@ function createPluginWithDef<T extends {}>({
   controlsLayout,
   ...pluginSettings
 }: PluginWithSchemaDefinition<T>): CellPlugin<T> {
-  const Controls = lazyLoad(
-    () => (import('./Controls') as unknown) as Promise<ControlsType<T>>
+  console.warn(
+    '@react-page/create-plugin-materialui is deprecated, its functionality is now nativly supportd by react-page'
   );
 
   return {
-    Component: (props: CellPluginComponentProps<T>) => {
-      return (
-        <>
-          {!props.readOnly ? (
-            <Controls
-              controlsLayout={controlsLayout}
-              schema={schema}
-              Renderer={Renderer}
-              {...props}
-            />
-          ) : (
-            <Renderer {...props} />
-          )}
-        </>
-      );
+    Renderer,
+    controls: {
+      type: 'autoform',
+      columnCount: controlsLayout?.columnCount,
+      schema,
     },
     ...pluginSettings,
   };

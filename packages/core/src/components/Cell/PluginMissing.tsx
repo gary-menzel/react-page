@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { CellPluginComponentProps } from '../../service/plugin/classes';
+import { CellPluginComponentProps } from '../../types/plugins';
 
-const PluginMissing: React.FC<CellPluginComponentProps> = ({
+const PluginMissing: React.FC<CellPluginComponentProps<any>> = ({
   children,
   ...props
 }: // eslint-disable-next-line @typescript-eslint/no-explicit-any

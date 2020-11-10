@@ -25,9 +25,9 @@ class ImageComponent extends React.Component<
     this.props.ensureModeOn();
     this.props.onChange({
       isParallax:
-        this.props.state.isParallax === undefined
+        this.props.data.isParallax === undefined
           ? false
-          : !this.props.state.isParallax,
+          : !this.props.data.isParallax,
     });
   };
 
@@ -43,7 +43,7 @@ class ImageComponent extends React.Component<
 
   render() {
     const {
-      state: { isParallax = true, background = '' },
+      data: { isParallax = true, background = '' },
     } = this.props;
     return (
       <div>

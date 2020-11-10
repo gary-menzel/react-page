@@ -1,4 +1,4 @@
-import { CellPlugin } from '../service/plugin/classes';
+import { CellPlugin } from '../types/plugins';
 import { MigrationVersion } from './migrate';
 
 export type MigrationContext = {

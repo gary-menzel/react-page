@@ -93,7 +93,7 @@ const getStyles = (props: BackgroundRendererProps) => {
 const BackgroundHtmlRenderer: React.SFC<BackgroundRendererProps> = (props) => {
   const {
     children,
-    state: {
+    data: {
       darken = props.defaultDarken,
       lighten = props.defaultLighten,
       hasPadding = props.defaultHasPadding,

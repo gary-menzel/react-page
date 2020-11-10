@@ -1,4 +1,4 @@
-import { CellPlugin } from '../service/plugin/classes';
+import { CellPlugin } from '../types/plugins';
 import { Cell, EditableType, Row } from '../types/editable';
 
 const serializeRow = (r: Row, plugins: CellPlugin[]): Row => {

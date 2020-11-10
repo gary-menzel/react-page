@@ -1,9 +1,7 @@
-import { DividerProps } from './component';
-import { DividerRendererProps } from './renderer';
+import { CellPluginComponentProps } from '@react-page/core';
 import { Translations } from './translations';
 
 export interface DividerSettings {
-  Renderer: React.ComponentType<DividerRendererProps>;
-  Controls: React.ComponentType<DividerProps>;
+  Renderer: React.ComponentType<CellPluginComponentProps<void>>;
   translations?: Translations;
 }

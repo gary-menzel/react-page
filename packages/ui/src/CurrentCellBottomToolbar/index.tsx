@@ -2,10 +2,13 @@ import {
   useCellData,
   useCellPlugin,
   useFocusedNodeId,
-  useNodeProps,
+  useIsEditMode,
+  useIsPreviewMode,
+  useRemoveCell,
   useUpdateCellData,
 } from '@react-page/core';
 import React, { memo } from 'react';
+import AutoformControls from '../AutoformControls';
 import BottomToolbar from '../BottomToolbar';
 
 const Controls: React.FC<{
@@ -14,28 +17,31 @@ const Controls: React.FC<{
   const updateCellData = useUpdateCellData(nodeId);
   const cellData = useCellData(nodeId);
   const plugin = useCellPlugin(nodeId);
+  const remove = useRemoveCell(nodeId);
 
+  const isEditMode = useIsEditMode();
+
+  const isPreviewMode = useIsPreviewMode();
   const controls = plugin.controls;
 
-  if (controls.type === 'custom') {
+  const props = {
+    focused: true, // TODO: remove focused
+    readOnly: !isEditMode,
+    isEditMode: isEditMode,
+    isPreviewMode: isPreviewMode,
+    pluginConfig: plugin,
+    onChange: updateCellData,
+    data: cellData,
+    nodeId: nodeId,
+    remove: remove,
+  };
+
+  if (controls?.type === 'custom') {
     const { Component } = controls;
-    return (
-      <Component
-        pluginConfig={plugin}
-        onChange={updateCellData}
-        data={cellData}
-        nodeId={nodeId}
-      />
-    );
+    return <Component {...props} />;
   }
-  if (controls.type === 'autoform') {
-    return (
-      <AutoformControls
-        onChange={updateCellData}
-        data={cellData}
-        nodeId={nodeId}
-      />
-    );
+  if (controls?.type === 'autoform') {
+    return <AutoformControls {...props} {...controls} />;
   }
 
   return null;
@@ -45,7 +51,9 @@ const CurrentCellBottomToolbar: React.FC = () => {
 
   return (
     <BottomToolbar nodeId={nodeId} open={Boolean(nodeId)} dark={false}>
-      <Controls nodeId={nodeId} />
+      <div style={{ marginBottom: 24, maxHeight: '50vh', overflow: 'auto' }}>
+        <Controls nodeId={nodeId} />
+      </div>
     </BottomToolbar>
   );
 };

@@ -55,7 +55,7 @@ export const useCellDrop = (nodeId: string) => {
     }),
     hover(item, monitor) {
       if (plugin?.allowNeighbour) {
-        if (!plugin.allowNeighbour(item)) {
+        if (!plugin.allowNeighbour(item.cell)) {
           return false;
         }
       }

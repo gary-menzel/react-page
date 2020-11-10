@@ -1,7 +1,11 @@
-import { ImageProps } from './component';
-import { ImageApi } from './api';
-import { ImageRendererExtraProps } from './renderer';
+import { CellPluginComponentProps } from '@react-page/core';
+import { ImageUploadType } from '@react-page/ui';
+import { ImageState } from './state';
+import { Translations } from './translations';
 
-export type ImageControlsProps = ImageProps &
-  ImageApi &
-  ImageRendererExtraProps;
+export type ImageControlType = React.ComponentType<
+  CellPluginComponentProps<ImageState> & {
+    imageUpload?: ImageUploadType;
+    translations: Translations;
+  }
+>;

@@ -1,21 +1,29 @@
 import * as React from 'react';
-import { ImageRendererProps } from '../types/renderer';
+
 import { iconStyle } from './../common/styles';
-import { lazyLoad } from '@react-page/core';
+import { CellPluginComponentProps, lazyLoad } from '@react-page/core';
+import { ImageState } from '../types/state';
 
 const ImageIcon = lazyLoad(() => import('@material-ui/icons/Landscape'));
 
-const ImageHtmlRenderer: React.SFC<ImageRendererProps> = (props) => {
-  const { data, imagePreview } = props;
+const ImageHtmlRenderer: React.FC<CellPluginComponentProps<ImageState>> = (
+  props
+) => {
+  const { data } = props;
 
-  const src = imagePreview ? imagePreview.dataUrl : data?.src;
+  const src = data?.src;
+  const openInNewWindow = data?.openInNewWindow;
   const Image = (
     <img className="react-page-plugins-content-image" alt="" src={src} />
   );
   return src ? (
     <div>
       {data?.href && !props.isEditMode ? (
-        <a href={data?.href} target={data?.target} rel={data?.rel}>
+        <a
+          href={data?.href}
+          target={openInNewWindow ? '_blank' : undefined}
+          rel={openInNewWindow ? 'noreferrer noopener' : undefined}
+        >
           {Image}
         </a>
       ) : (

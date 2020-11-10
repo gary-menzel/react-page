@@ -9,6 +9,8 @@ import {
   ImageLoaded,
 } from './ImageUpload/types';
 import { RGBColor } from './ColorPicker/types';
+import makeUniformsSchema from './AutoformControls/makeUniformsSchema';
+
 const Trash = loadable(() => import('./Trash/index'));
 const PluginDrawer = loadable(() => import('./PluginDrawer/index'));
 const DisplayModeToggle = loadable(() => import('./DisplayModeToggle/index'));
@@ -22,6 +24,7 @@ const ColorPicker = loadable(() => import('./ColorPicker/index'));
 export default EditorUI;
 
 export {
+  makeUniformsSchema,
   BottomToolbarProps,
   EditorUI,
   Trash,

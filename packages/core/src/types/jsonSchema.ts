@@ -40,7 +40,7 @@ export type JsonSchemaProperty<T> = T extends (infer U)[]
   ? BooleanType
   : never;
 
-export type JsonSchema<T extends object> = {
+export type JsonSchema<T> = {
   title?: string;
   type: 'object';
   properties: { [K in keyof T]-?: JsonSchemaProperty<T[K]> };

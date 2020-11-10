@@ -23,7 +23,7 @@ class ColorComponent extends Component<BackgroundProps & ColorComponentProps> {
   render() {
     const {
       backgroundColorPreview,
-      state: { backgroundColor = this.props.defaultBackgroundColor },
+      data: { backgroundColor = this.props.defaultBackgroundColor },
     } = this.props;
     return (
       <div style={{ display: 'flex' }}>

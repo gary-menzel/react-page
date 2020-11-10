@@ -1,4 +1,4 @@
-import { CellPlugin } from '../service/plugin/classes';
+import { CellPlugin } from './plugins';
 import has from 'lodash.has';
 import { Languages } from '../EditorStore';
 export type I18nField<T> = {

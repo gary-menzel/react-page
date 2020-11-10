@@ -53,7 +53,7 @@ const HTMLCell: React.FC<
     ? plugins.find((p) => p.id === cell.plugin.id)
     : null;
   if (plugin) {
-    const { Component } = plugin;
+    const { Renderer } = plugin;
     const data = getCellData(cell, lang);
     return (
       <div className={cn}>
@@ -63,11 +63,10 @@ const HTMLCell: React.FC<
             (cell.rows?.length > 0 ? '' : ' react-page-cell-leaf')
           }
         >
-          <Component
+          <Renderer
             readOnly={true}
             lang={lang}
             nodeId={cell.id}
-            state={data}
             data={data}
             onChange={noop}
             pluginConfig={plugin}
@@ -84,7 +83,7 @@ const HTMLCell: React.FC<
                 className="react-page-cell-inner"
               />
             ))}
-          </Component>
+          </Renderer>
         </div>
       </div>
     );

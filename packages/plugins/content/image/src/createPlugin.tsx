@@ -1,6 +1,5 @@
-import { CellPlugin, CellPluginComponentProps } from '@react-page/core';
-import * as React from 'react';
-import Component from './Component/index';
+import { CellPlugin } from '@react-page/core';
+
 import { defaultSettings } from './default/settings';
 import { ImageSettings } from './types/settings';
 import { ImageState } from './types/state';
@@ -8,10 +7,11 @@ import { ImageState } from './types/state';
 const createPlugin = (settings?: ImageSettings): CellPlugin<ImageState> => {
   const mergedSettings = { ...defaultSettings, ...settings };
   return {
-    Component: (props: CellPluginComponentProps<ImageState>) => (
-      <Component {...props} {...mergedSettings} />
-    ),
-
+    controls: {
+      type: 'custom',
+      Component: mergedSettings.Controls,
+    },
+    Renderer: mergedSettings.Renderer,
     id: 'ory/editor/core/content/image',
     version: 1,
     IconComponent: mergedSettings.IconComponent,

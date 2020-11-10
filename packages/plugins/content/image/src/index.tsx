@@ -4,16 +4,14 @@ import ImageHtmlRenderer from './Renderer/ImageHtmlRenderer';
 import { ImageSettings } from './types/settings';
 import { ImageState } from './types/state';
 import { ImageUploadType } from '@react-page/ui';
-const ImageDefaultControls = lazyLoad(() =>
-  import('./Controls/ImageDefaultControls')
-);
+const ImageControls = lazyLoad(() => import('./Controls/ImageControls'));
 
 const imagePlugin: (
   settings?: Partial<ImageSettings>
 ) => CellPlugin<ImageState> = (settings) =>
   createPlugin({
     Renderer: ImageHtmlRenderer,
-    Controls: ImageDefaultControls,
+    Controls: ImageControls,
     ...settings,
   });
 
