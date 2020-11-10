@@ -1,5 +1,5 @@
-import { CellPluginComponentProps } from '@react-page/core';
-import { ImageUploadType } from '@react-page/ui';
+import { CellPluginComponentProps, ImageUploadType } from '@react-page/editor';
+
 import { ImageState } from './state';
 import { Translations } from './translations';
 

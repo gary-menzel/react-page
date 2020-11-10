@@ -2,7 +2,8 @@ import {
   CellPluginComponentProps,
   CellPlugin,
   JsonSchema,
-} from '@react-page/core';
+} from '@react-page/editor';
+import React from 'react';
 
 export type ControlsType<T> = React.ComponentType<ControlProps<T>>;
 
@@ -10,8 +11,8 @@ export type ControlsLayout = {
   columnCount: number;
 };
 // eslint-disable-next-line @typescript-eslint/ban-types
-type CommonConfig<T extends {}> = {
-  schema?: JsonSchema<T>;
+type CommonConfig<T> = {
+  schema?: T extends unknown ? unknown : T extends void ? void : JsonSchema<T>;
   controlsLayout?: ControlsLayout;
   Renderer: React.ComponentType<CellPluginComponentProps<T>>;
 };

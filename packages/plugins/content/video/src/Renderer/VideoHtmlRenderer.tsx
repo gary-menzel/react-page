@@ -2,7 +2,7 @@ import * as React from 'react';
 import PlayArrow from '@material-ui/icons/PlayArrow';
 import { iconStyle } from '../common/styles';
 
-import { lazyLoad } from '@react-page/core';
+import { lazyLoad } from '@react-page/editor';
 
 import { VideoHtmlRendererProps } from '../types/renderer';
 

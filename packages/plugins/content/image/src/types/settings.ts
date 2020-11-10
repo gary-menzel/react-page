@@ -1,8 +1,9 @@
 import {
   CellPluginRenderer,
   CellPluginCustomControlsComonent,
-} from '@react-page/core';
-import { ImageUploadType } from '@react-page/ui';
+  ImageUploadType,
+} from '@react-page/editor';
+import { ImageControlType } from './controls';
 import { ImageState } from './state';
 
 import { Translations } from './translations';
@@ -10,7 +11,7 @@ import { Translations } from './translations';
 export type ImageSettings = {
   imageUpload?: ImageUploadType;
   Renderer: CellPluginRenderer<ImageState>;
-  Controls: CellPluginCustomControlsComonent<ImageState>;
+  Controls: ImageControlType;
   translations?: Translations;
   IconComponent?: React.ReactNode;
 };

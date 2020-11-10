@@ -1,8 +1,9 @@
-import { CellPlugin, lazyLoad } from '@react-page/core';
+import { CellPlugin, lazyLoad } from '@react-page/editor';
 import * as React from 'react';
 import { AnyAction } from 'redux';
 import { ActionTypes } from 'redux-undo';
 import SlateEditor from './components/SlateEditor';
+import SlateProvider from './components/SlateProvider';
 import { defaultTranslations } from './default/settings';
 import HtmlToSlate from './HtmlToSlate';
 import v002 from './migrations/v002';
@@ -107,6 +108,14 @@ function plugin<TPlugins extends SlatePluginCollection = DefaultPlugins>(
   const htmlToSlate = HtmlToSlate({ plugins });
 
   return {
+    Provider: (props) => (
+      <SlateProvider
+        {...props}
+        plugins={plugins}
+        translations={settings.translations}
+        defaultPluginType={settings.defaultPluginType}
+      />
+    ),
     Renderer: (props) => (
       <SlateEditor
         {...props}
@@ -117,6 +126,7 @@ function plugin<TPlugins extends SlatePluginCollection = DefaultPlugins>(
     ),
     controls: {
       type: 'custom',
+      dark: true,
       Component: (props) => (
         <Controls
           {...props}

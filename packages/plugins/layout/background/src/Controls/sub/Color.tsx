@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ColorPicker, RGBColor } from '@react-page/ui';
+import { ColorPicker, RGBColor } from '@react-page/editor';
 import { BackgroundProps } from '../../types/component';
 
 export interface ColorComponentProps {

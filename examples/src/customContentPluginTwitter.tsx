@@ -4,11 +4,11 @@ import { Timeline } from 'react-twitter-widgets';
 export default createContentPlugin<{
   screenName: string;
 }>({
-  Renderer: ({ state }) => (
+  Renderer: ({ data }) => (
     <Timeline
       dataSource={{
         sourceType: 'profile',
-        screenName: state.screenName,
+        screenName: data.screenName,
       }}
       options={{
         height: '400',

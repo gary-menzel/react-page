@@ -4,7 +4,7 @@ import { ReactEditor } from 'slate-react';
 
 import { Translations } from './translations';
 import { Node } from 'slate';
-import { JsonSchema } from '@react-page/core';
+import { JsonSchema } from '@react-page/editor';
 
 export interface PluginButtonProps {
   translations?: Partial<Translations>;

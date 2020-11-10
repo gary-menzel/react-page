@@ -1,4 +1,4 @@
-import { Plugins } from '@react-page/core';
+import { Plugins } from '@react-page/editor';
 // The background plugin
 import background, { ModeEnum } from '@react-page/plugins-background';
 import '@react-page/plugins-background/lib/index.css';

@@ -1,4 +1,4 @@
-import { CellPlugin } from '@react-page/core';
+import { CellPlugin } from '@react-page/editor';
 
 import { defaultSettings } from './default/settings';
 import Html5VideoHtmlRenderer from './Renderer/Html5VideoHtmlRenderer';

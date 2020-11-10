@@ -1,4 +1,4 @@
-import { CellPlugin, lazyLoad } from '@react-page/core';
+import { CellPlugin, lazyLoad } from '@react-page/editor';
 import * as React from 'react';
 import { defaultSettings } from './default/settings';
 import DividerHtmlRenderer from './Renderer/DividerHtmlRenderer';

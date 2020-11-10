@@ -1,8 +1,7 @@
 import './wdyr';
 import Editor, { VERSION, EditorProps } from '@react-page/editor';
-import '@react-page/core/lib/index.css'; // we also want to load the stylesheets
+import '@react-page/editor/lib/index.css'; // we also want to load the stylesheets
 
-import '@react-page/ui/lib/index.css';
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 // The content state

@@ -1,6 +1,5 @@
-import { CellPluginComponentProps } from '@react-page/core';
-import { BackgroundSettings } from './settings';
+import { CellPluginComponentProps } from '@react-page/editor';
+
 import { BackgroundState } from './state';
 
-export type BackgroundProps = CellPluginComponentProps<BackgroundState> &
-  BackgroundSettings;
+export type BackgroundProps = CellPluginComponentProps<BackgroundState>;

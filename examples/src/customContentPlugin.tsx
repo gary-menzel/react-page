@@ -8,12 +8,12 @@ export default createContentPlugin<{
   age: number;
 }>({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Renderer: ({ state }) => (
+  Renderer: ({ data }) => (
     <div>
-      <h3>{state.title}</h3>
-      <p>Firstname: {state.firstName}</p>
-      <p>Lastname: {state.lastName}</p>
-      <p>Age: {state.age}</p>
+      <h3>{data.title}</h3>
+      <p>Firstname: {data.firstName}</p>
+      <p>Lastname: {data.lastName}</p>
+      <p>Age: {data.age}</p>
     </div>
   ),
   id: 'custom-content-plugin',

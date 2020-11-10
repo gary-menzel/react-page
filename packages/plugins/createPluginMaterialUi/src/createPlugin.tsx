@@ -1,4 +1,4 @@
-import { CellPlugin } from '@react-page/core';
+import { CellPlugin } from '@react-page/editor';
 import { PluginWithSchemaDefinition } from './types';
 
 type CustomizeFunction<T, CT> = (
@@ -6,7 +6,7 @@ type CustomizeFunction<T, CT> = (
 ) => PluginWithSchemaDefinition<T & CT>;
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-function createPluginWithDef<T extends {}>({
+function createPluginWithDef<T>({
   schema,
   Renderer,
   controlsLayout,
