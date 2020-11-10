@@ -7,16 +7,23 @@ import Droppable from './Droppable';
 import ResizableRowCell from './ResizableRowCell';
 
 const reduceToIdAndSizeArray = (
-  acc: { offset: number; id: string }[],
+  acc: { offset: number; id: string; size: number; maxSize: number }[],
   node: Node,
-  index: number
+  index: number,
+  array: Node[]
 ) => {
+  const nextNode = array[index + 1];
+
   const size = isRow(node) ? 12 : node.size;
+  const nextSize = !nextNode || isRow(nextNode) ? 0 : nextNode.size;
+  const offset = size + (acc[index - 1]?.offset ?? 0);
   return [
     ...acc,
     {
       id: node.id,
-      offset: size + (acc[index - 1]?.offset ?? 0),
+      size,
+      maxSize: size + nextSize - 1,
+      offset,
     },
   ];
 };
@@ -53,7 +60,7 @@ const Row: React.FC<{ nodeId: string }> = ({ nodeId }) => {
         style={{ position: 'relative', borderColor: 'red' }}
         onClick={blurAllCells}
       >
-        {childrenWithOffsets.map(({ offset, id }, index) => (
+        {childrenWithOffsets.map(({ offset, id, size, maxSize }, index) => (
           <ResizableRowCell
             key={id}
             isLast={index === childrenWithOffsets.length - 1}
@@ -61,6 +68,8 @@ const Row: React.FC<{ nodeId: string }> = ({ nodeId }) => {
             nodeId={id}
             rowHasInlineChildrenPosition={rowHasInlineChildrenPosition}
             offset={offset}
+            size={size}
+            maxSize={maxSize}
           />
         ))}
       </div>

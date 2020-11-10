@@ -15,6 +15,8 @@ type Props = {
   rowHasInlineChildrenPosition: string;
   isLast: boolean;
   offset: number;
+  size: number;
+  maxSize: number;
 };
 const ResizableRowCell: React.FC<Props> = ({
   nodeId,
@@ -22,6 +24,8 @@ const ResizableRowCell: React.FC<Props> = ({
   rowHasInlineChildrenPosition,
   isLast,
   offset,
+  size,
+  maxSize,
 }) => {
   const stepWidth = Math.round(rowWidth / 12);
   const { allowResizeInEditMode } = useOptions();
@@ -54,12 +58,12 @@ const ResizableRowCell: React.FC<Props> = ({
           }}
           axis="x"
           onDrag={(e, data) => {
-            const newSize = Math.round(
-              (rowHasInlineChildrenPosition === 'right'
-                ? rowWidth - data.x
-                : data.x) / stepWidth
-            );
-            resize(newSize);
+            const diff = Math.round(data.deltaX / stepWidth);
+            const newSize =
+              rowHasInlineChildrenPosition === 'right'
+                ? size - diff
+                : size + diff;
+            if (newSize > 0 && newSize <= maxSize) resize(newSize);
           }}
           grid={[stepWidth, 0]}
         >
