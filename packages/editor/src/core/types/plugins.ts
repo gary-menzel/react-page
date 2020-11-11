@@ -2,7 +2,7 @@
 
 import { AnyAction } from 'redux';
 
-import { Migration } from '../migrations/Migration';
+import type { Migration } from '../migrations/Migration';
 import { Cell, PartialCell, PartialRow } from './editable';
 import { JsonSchema } from './jsonSchema';
 

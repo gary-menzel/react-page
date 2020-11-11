@@ -76,7 +76,9 @@ import {
 import { HoverInsertActions } from '../../types/hover';
 import deepEquals from '../../utils/deepEquals';
 import { getDropLevels } from '../../utils/getDropLevels';
+import { getCellData } from '../../utils/getCellData';
 
+console.log('import hooks');
 export const EditableContext = createContext<string>(null);
 export const OptionsContext = createContext<Options>({
   allowMoveInEditMode: true,
@@ -256,16 +258,6 @@ export const useCellPlugin = (nodeId: string) => {
 
 export const useCellDataI18nRaw = (nodeId: string) => {
   return useCellProps(nodeId, (c) => c.dataI18n);
-};
-
-export const getCellData = (cell: Cell, lang: string) => {
-  const dataI18n = cell.dataI18n;
-
-  return (
-    dataI18n?.[lang] ??
-    // find first non-empty
-    dataI18n?.[Object.keys(dataI18n).find((l) => dataI18n[l])]
-  );
 };
 
 export const useCellData = (nodeId: string, lang?: string) => {

@@ -1,10 +1,10 @@
 import { BackendFactory } from 'dnd-core';
 
-import { DisplayModes } from '../core/actions/display';
+import type { DisplayModes } from '../core/actions/display';
 
-import { Languages } from '../core/EditorStore';
+import type { Languages } from '../core/EditorStore';
 
-import { EditableType, Options } from '../core/types';
+import type { EditableType, Options } from '../core/types';
 
 import React from 'react';
 import { HTMLRenderer } from '../renderer/HTMLRenderer';

@@ -1,10 +1,5 @@
 import { computeSizes, computeInlines } from './sizing';
-import {
-  optimizeCell,
-  optimizeRow,
-  optimizeRows,
-  optimizeCells,
-} from './optimize';
+import { optimizeRow, optimizeRows, optimizeCells } from './optimize';
 import { Row } from '../../../types/editable';
 
 export const setAllSizesAndOptimize = (rows: Array<Row> = []): Array<Row> =>

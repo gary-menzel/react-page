@@ -1,7 +1,7 @@
 export * from './core/types';
 export * from './core/components/hooks';
 
-import { RGBColor } from 'react-color';
+import type { RGBColor } from 'react-color';
 import lazyLoad from './core/helper/lazyLoad';
 import { Migration } from './core/migrations/Migration';
 
@@ -11,7 +11,7 @@ import ColorPicker from './ui/ColorPicker';
 import { colorToString } from './ui/ColorPicker/colorToString';
 
 import ImageUpload from './ui/ImageUpload';
-import {
+import type {
   ImageLoaded,
   ImageUploaded,
   ImageUploadType,

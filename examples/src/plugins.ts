@@ -1,4 +1,5 @@
 import { Plugins } from '@react-page/editor';
+
 // The background plugin
 import background, { ModeEnum } from '@react-page/plugins-background';
 import '@react-page/plugins-background/lib/index.css';
@@ -9,6 +10,7 @@ import divider from '@react-page/plugins-divider';
 import html5video from '@react-page/plugins-html5-video';
 import '@react-page/plugins-html5-video/lib/index.css';
 // The image plugin
+
 import { imagePlugin, ImageUploadType } from '@react-page/plugins-image';
 import '@react-page/plugins-image/lib/index.css';
 // The spacer plugin

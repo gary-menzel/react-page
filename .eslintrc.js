@@ -36,6 +36,7 @@ module.exports = {
     },
   },
   rules: {
+    'import/first': false,
     'prettier/prettier': 'error',
     'react/display-name': 0,
     'react/prop-types': 0,

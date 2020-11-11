@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import { getCellData } from '../core/components/hooks';
 import { migrateEditable } from '../core/migrations/migrate';
 import { setAllSizesAndOptimize } from '../core/reducer/editable/helper/setAllSizesAndOptimize';
 import { Cell, CellPlugin, EditableType, Row } from '../core/types';
+import { getCellData } from '../core/utils/getCellData';
 
 const gridClass = (size = 12): string =>
   `react-page-cell-sm-${size} react-page-cell-xs-12`;

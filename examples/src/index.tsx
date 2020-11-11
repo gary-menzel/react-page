@@ -1,10 +1,12 @@
 import './wdyr';
+
 import Editor, { VERSION, EditorProps } from '@react-page/editor';
 import '@react-page/editor/lib/index.css'; // we also want to load the stylesheets
 
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 // The content state
+
 import contents from './contents';
 //import customLayoutPluginWithInitialState from './customLayoutPluginWithInitialState';
 import { plugins } from './plugins';
@@ -29,6 +31,8 @@ const LANGUAGES = [
     label: 'Deutsch',
   },
 ];
+
+const URL_PARAMS = new URLSearchParams(window.location.search);
 const KeepStateEditor: React.FC<EditorProps> = ({ value, ...props }) => {
   const [state, setState] = React.useState(value);
 
@@ -129,6 +133,7 @@ const KeepStateEditor: React.FC<EditorProps> = ({ value, ...props }) => {
           onChangeLang={setLang}
           lang={lang}
           languages={LANGUAGES}
+          readOnly={Boolean(URL_PARAMS.get('readonly'))}
         />
         <Button variant="outlined" onClick={() => setState(value)}>
           Reset this editor
