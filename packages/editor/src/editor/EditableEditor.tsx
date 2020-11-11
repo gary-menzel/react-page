@@ -8,7 +8,7 @@ import Provider from '../core/Provider';
 import { EditableType, Options } from '../core/types';
 import EditorUI from '../ui/EditorUI';
 import StickyWrapper from './StickyWrapper';
-console.log('import Editable editor');
+
 export type DndBackend = BackendFactory;
 export type EditableEditorProps = {
   dndBackend?: DndBackend;

@@ -78,7 +78,6 @@ import deepEquals from '../../utils/deepEquals';
 import { getDropLevels } from '../../utils/getDropLevels';
 import { getCellData } from '../../utils/getCellData';
 
-console.log('import hooks');
 export const EditableContext = createContext<string>(null);
 export const OptionsContext = createContext<Options>({
   allowMoveInEditMode: true,
